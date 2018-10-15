@@ -12,6 +12,8 @@ class SlotsController < ApplicationController
   def create
     @doctor = Doctor.find(params[:slot][:doctor_id])
     @slot = @doctor.slots.build(params[:slot])
+    @slot.is_booked = false
+    @slot.save
     if @slot.save
       flash[:notice] = "the slot has been created successfully"
       redirect_to slots_path
@@ -20,6 +22,5 @@ class SlotsController < ApplicationController
        redirect_to slots_path
     end
   end
-  
-  
+ 
 end

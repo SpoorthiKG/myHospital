@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :doctors , :has_many => :appointments, :has_many => :patients , :has_many => :slots, :collection => { :view => :get, :recommend_patient => :get,:change_password=>:get,:patients_being_treated => :get,:showing=>:get}
   map.resources :departments, :has_many => :doctors
   map.resources :slots , :has_one => :appointment, :has_one => :patient, :through => :appointment,  :collection => { :department_list => :get, :department_doctor_list => :get}
-  map.resources :appointments ,:has_many => :medicalreports, :collection => {:available_doctors => :get, :book_an_appointment => :get, :available_slots => :get, :appointments => :get}
+  map.resources :appointments ,:has_many => :medicalreports, :collection => {:no_slots => :get,:available_doctors => :get, :book_an_appointment => :get, :available_slots => :get, :appointments => :get}
   map.resources :rooms, :has_many => :beds , :collection =>{:export_csv_records=> :get}
   map.resources :beds,:has_many => :patient_to_beds, :has_many => :patients , :through => :patient_to_beds, :collection => {:adding_room => :get, :adding_bed => :get}
   map.resources :doctor_suggested_patients , :has_many => :patients , :has_many => :doctors

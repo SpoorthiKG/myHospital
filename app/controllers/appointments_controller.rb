@@ -9,7 +9,9 @@ class AppointmentsController < ApplicationController
   def create
     @user = current_user
     @slot = Slot.find(params[:slot])
-    @appointment = Appointment.new(:doctor_id =>params[:doctor],:slot_id=> params[:slot],:patient_id=>@user.user_determin_id,:appointment_date=>@slot.slot_date)
+    @slot.is_booked = 1
+    @slot.save
+    @appointment = Appointment.new(:doctor_id =>params[:doctor],:slot_id=> params[:slot],:patient_id=>@user.user_determin_id,:appointment_date=>@slot.slot_date,:is_booked=>1)
     if @appointment.save
       flash[:notice] = "You have successfully booked the appointment"
       redirect_to view_patients_path
@@ -25,8 +27,14 @@ class AppointmentsController < ApplicationController
   
   def available_doctors
     @doctors = Department.find(params[:id]).doctors
+    if @doctors.present?
     render :update do |page|
       page.replace_html 'available_doctors', :partial => "available_doctors"
+    end
+    else
+      render :update do |page|
+        page.replace_html 'available_doctors', :partial => "no_doctors"
+      end
     end
   end
   
@@ -35,9 +43,15 @@ class AppointmentsController < ApplicationController
   end
   
   def available_slots
-    @slots = Doctor.find(params[:id]).slots
-    render :update do |page|
-      page.replace_html 'available_slots' , :partial => "available_slots"
+    @slots = Slot.find_all_by_doctor_id(params[:id],:conditions => ["is_booked = ?", false])
+    if @slots.present?
+      render :update do |page|
+        page.replace_html 'available_slots' , :partial => "available_slots"
+      end
+    else
+      render :update do |page|
+        page.replace_html 'available_slots' , :partial => "no_slots"
+    end
     end
   end
   
