@@ -9,16 +9,13 @@ class AppointmentsController < ApplicationController
   def create
     @user = current_user
     @slot = Slot.find(params[:slot])
-    @appointment = Appointment.new
-    @appointment.doctor_id = params[:doctor]
-    @appointment.slot_id = params[:slot]
-    @appointment.patient_id = @user.user_determin_id
-    @appointment.appointment_date = @slot.slot_date
+    @appointment = Appointment.new(:doctor_id =>params[:doctor],:slot_id=> params[:slot],:patient_id=>@user.user_determin_id,:appointment_date=>@slot.slot_date)
     if @appointment.save
       flash[:notice] = "You have successfully booked the appointment"
       redirect_to view_patients_path
   else
-    render "index"
+    flash[:notice]= 'Something went wrong!!! Try again'
+    redirect_to view_patients_path
     end
   end
 

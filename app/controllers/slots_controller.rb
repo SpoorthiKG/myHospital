@@ -5,7 +5,6 @@ class SlotsController < ApplicationController
   end
   
   def new
-    puts "================#{params[:doctor_id]}"
     @doctor = Doctor.find(params[:doctor_id])
     @slot = @doctor.slots.build
   end

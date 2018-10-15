@@ -40,12 +40,7 @@ class PatientToBedsController < ApplicationController
     @bed = Bed.find(@patient_to_bed.bed_id)
     @bed.vacant = true
     @bed.save
-    @discharged_patient = DischargedPatient.new
-    @discharged_patient.bed_id = @patient_to_bed.bed_id
-    @discharged_patient.patient_id = @patient_to_bed.patient_id
-    @discharged_patient.admitted_on = @patient_to_bed.admitted_on
-    @discharged_patient.discharged_on = Time.now
-    @discharged_patient.save
+    @discharged_patient = DischargedPatient.new(:bed_id => @patient_to_bed.bed_id,:patient_id => @patient_to_bed.patient_id,:admitted_on => @patient_to_bed.admitted_on,:discharged_on => Time.now)
     @bed = Bed.find(@patient_to_bed.bed_id)
     @patient_to_bed.destroy
     if @patient_to_bed.destroy

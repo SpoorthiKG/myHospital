@@ -16,13 +16,13 @@ authorization do
  role :patient do
    has_permission_on [:medicalreports] , :to => [:record_view] 
    has_permission_on [:appointments] , :to => [:delete, :available_doctors, :book_an_appointment, :available_slots,:index, :show,:create,:new]
-   has_permission_on [:patients] , :to => :previous_histroy
+   has_permission_on [:patients] , :to => [:previous_histroy, :change_password,:reset]
  end
  
  role :doctor do
    has_permission_on [:medicalreports] , :to => [:upload_file,:new,:create, :update]
    has_permission_on [:appointments] , :to => [:index, :show, :appointments]
-   has_permission_on [:doctors] , :to => [:recommend_patient , :patients_being_treated, :change_password]
+   has_permission_on [:doctors] , :to => [:recommend_patient , :patients_being_treated, :change_password, :reset]
    has_permission_on [:patients] , :to =>[:show]
  end
  

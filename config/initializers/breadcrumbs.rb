@@ -30,7 +30,7 @@ Gretel::Crumbs.layout do
   
   crumb :doctors_show do
     link "Profile" , {:controller => "doctors", :action => "show"}
-    parent :doctors_index
+    parent :departments_index
   end 
   
   crumb :slots_new do
