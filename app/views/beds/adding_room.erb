@@ -1,0 +1,19 @@
+<%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :adding_room %>
+<br/><label class = 'mt-5'>Select a Room</label>
+<%= select_tag :room, options_for_select(@rooms.map{|p| [p.room_number, p.id]})  , :class => "form-control mt-3", :onchange => "show_the_value(this.value)" %>
+<div id ="adding_bed" style="margin-top: 10px;"></div>
+            
+ <% end %>              
+<script>
+  function show_the_value(room_id){
+    
+    jQuery.ajax({
+            url : '/beds/adding_bed',
+            data: {id: room_id}
+          });
+          alert(room_id)
+     }
+     </script>
+     

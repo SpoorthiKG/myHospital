@@ -1,0 +1,54 @@
+ <%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<div class ="row">
+      <div class = "col-3 ml-auto w-25">
+              <div class="card card-body mb-2">
+                                   
+                                      <%= link_to "logout", logout_path %>
+              </div>
+      </div>
+</div> 
+
+<div class = "row">
+            <div class = "col">
+                    <div class = "col-3 border border-info rounded float-left mr-5">
+                  <%= link_to "department", departments_path%><br/>
+                        <span>Lists all the Various Departments of this Hospital</span>
+                </div>
+                    <div class = "col-3 border border-info rounded float-left mr-5" >
+                        <%= link_to "create slots", slots_path %><br/>
+                        <span>This can create the Slots for the Doctors</span>
+                </div>
+                    <div class = "col-3 border border-info rounded float-left">
+                          <%= link_to "assign patient with bed" , doctor_suggested_patients_path %><br/>
+                        <span>The patients can be assigned to the beds based on the Doctor</span>
+                </div>
+                
+        </div>
+</div>
+<div class = "row mt-5">
+        <div class = "col">
+               <div class = "col-3 border border-info rounded float-left mr-5" >
+                  <%= link_to "Rooms", rooms_path%><br/>
+                        <span>Lists all the Various Rooms of this Hospital</span>
+                </div>
+            <div class = "col-3 border border-info rounded float-left mr-5">
+                        <%= link_to "Beds", adding_room_beds_path%><br/>
+                        <span>The available beds inside the rooms of hospital</span>
+                </div>
+            <div class = "col-3 border border-info rounded float-left">
+                          <%= link_to "admitted patients" , patient_to_beds_path %><br/>
+                        <span>Lists all the patients who are admitted </span>
+                </div>
+    </div>
+</div>
+<div class = "row mt-5">
+    <div class = "col">
+               <div class = "col-3 border border-info rounded float-left mr-5" >
+                  <%= link_to "Appointments", book_an_appointment_appointments_path%><br/>
+                        <span>Lists all the Various Rooms of this Hospital</span>
+                </div>
+    </div>
+</div>
+
+                                                                                

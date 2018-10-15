@@ -1,0 +1,28 @@
+<%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :create, Appointment.new%>
+<% form_for :appointment, :url => {:controller => :appointments, :action => :create} do |f| %>
+<%= f.error_messages %>
+<label class = 'mt-5'>Select a Department</label>
+<%=  select_tag :department, options_for_select(@departments.map{|p| [p.name, p.id]})  , :class => "form-control", :onchange => "show_the_value(this.value)" %>
+<div id ="available_doctors" style="margin-top: 10px;"></div>
+<div id ="available_slots" style="margin-top: 10px;"></div>
+<!--<%= f.submit "Create", :class => "btn"%>-->
+<%end%>
+<%end%>
+<script>
+  function show_the_value(department_id){
+    jQuery.ajax({
+            url : '/appointments/available_doctors',
+            data: {id: department_id}
+          });
+     }
+     function show_the_doctor(doctor_id){
+    jQuery.ajax({
+            url : '/appointments/available_slots',
+            data: {id: doctor_id}
+          });
+        }
+        
+     
+  </script>

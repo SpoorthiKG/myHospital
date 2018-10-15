@@ -1,0 +1,26 @@
+<%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :patients_being_treated %>
+<%if @patients.present?%>
+<table class ="table table-hover mt-5">
+    <thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Action</th>
+  </tr>
+    </thead>
+    <tbody>
+<% for patient in @patients %>
+  <tr>
+    <td><%=h patient.patient.first_name%></td>
+    <td><%= link_to 'Show', patient%><br/>
+  </tr>
+<% end %>
+    </tbody>
+</table>
+<%else%>
+<h2> No </h2>
+<%end%>
+<br />
+<%end%>
+<button class = "btn btn-warning"><%= link_to "Download Pdf", showing_doctors_path %></button>

@@ -1,0 +1,29 @@
+<%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :index %>
+<%if @patient_to_beds.present?%>
+<h3 class='mt-5'>Listing  Admitted Patients</h3>
+<table class = "table table-hover">
+    <thead>
+  <tr>
+    <th scope = "col">Patient Name</th>
+    <th scope = "col">Date of Admission</th>
+    <th scope = "col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+<% @patient_to_beds.each do |patient_to_bed| %>
+  <tr>
+    <td><%= patient_to_bed.patient.first_name %></td>
+    <td><%= patient_to_bed.admitted_on %></td>
+    <td ><%= link_to "Delete", patient_to_bed , :confirm => 'Are you sure?', :method => :delete%></td>
+  </tr>
+  
+<% end %>
+   </tbody>
+  <%else%>
+  <h2 class='mt-5'>No Patients</h2>
+  <%end%>
+</table>
+<br />
+<% end %>

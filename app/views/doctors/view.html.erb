@@ -1,0 +1,38 @@
+<%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<div class ="row">
+      <div class = "col-3 ml-auto w-25">
+              <div class="card card-body mb-2">
+                                   
+                                      <%= link_to "logout", logout_path %>
+              </div>
+      </div>
+</div> 
+<div class = "row">
+            <div class = "col">
+                    <div class = "col-3 border border-info rounded float-left" style = "margin-right: 50px;">
+                            <%= link_to "Upload records" , new_medicalreport_path%><br/>
+                            <span>The records of the patients can be uploaded</span>
+                </div>
+                    <div class = "col-3 border border-info rounded float-left" style = "margin-right: 50px;">
+                        <%= link_to "Appointments", appointments_appointments_path %><br/>
+                        <span>Booked appointments with the doctor</span>    
+                    </div>
+                    <div class = "col-3 border border-info rounded float-left">
+                        <%= link_to "Request for bed to patients", recommend_patient_doctors_path %><br/>
+                        <span>Can send the request for bed</span>
+                </div>
+            </div>
+</div>
+    <div class = "row">
+            <div class = "col">
+                    <div class = "col-3 border border-info rounded float-left mt-5" style = "margin-right: 50px;">
+                  <%= link_to "change,reset password",change_password_doctors_path %><br/>
+                        <span>Chaning the credentials</span>
+                </div>
+                <div class = "col-3 border border-info rounded float-left mt-5" style = "margin-right: 50px;">
+                        <%= link_to "Patients Being Treated", patients_being_treated_doctors_path %><br/>
+                        <span>Booked appointments with the doctor</span>    
+                    </div>
+        </div>
+</div>

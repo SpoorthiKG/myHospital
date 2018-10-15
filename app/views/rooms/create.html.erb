@@ -1,0 +1,22 @@
+<%if @rooms.present?%>
+<h3>Listing Rooms</h3>
+<table class = "table table-hover">
+    <thead>
+  <tr>
+    <th scope = "col">Room Number</th>
+  </tr>
+    </thead>
+    <tbody>
+<% @rooms.each do |room| %>
+  <tr>
+    <td><%=h room.room_number %></td>
+  </tr>
+  
+<% end %>
+   </tbody>
+  <%else%>
+  <h2>No Rooms</h2>
+  <%end%>
+</table>
+<br />
+<button type = "button" class = "btn btn-warning"><%= link_to 'New Rom', new_room_path %></button>

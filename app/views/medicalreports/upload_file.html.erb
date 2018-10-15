@@ -1,0 +1,12 @@
+<%if permitted_to? :create, :medicalreports%>
+<label>Select a Patient</label>
+<%= select_tag :report, options_for_select(@appointments.map{|p| [p.patient.first_name, p.patient.id]})  , :class => "form-control" %>
+<% form_for @medicalreport , :html => { :multipart => true } do |form| %>
+<%= form.label :comments %>
+<%= form.text_area :comments , :class => "form-control"%>
+<%= form.label :medication %>
+<%= form.text_field :medication , :class => "form-control"%>
+  <%= form.file_field :record , :class => "mt-5" %><br/>
+ <%= form.submit "Create" %>
+<% end %>
+<% end %>

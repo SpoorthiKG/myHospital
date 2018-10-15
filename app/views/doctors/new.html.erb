@@ -1,0 +1,59 @@
+<%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :create %>
+            <h5 class = 'mt-5'>New User</h5>
+            <% form_for @doctor do |f| %>
+            <%= f.error_messages %>
+            
+            <form>
+            <div class ="form-group">
+                <%= f.label :first_name %>
+                <%= f.text_field :first_name , :class => "form-control" %>
+            </div>
+            <%= f.hidden_field :department_id, :value => params[:department_id] %>
+            <div class ="form-group">
+                <%= f.label :middle_name %>
+                <%= f.text_field :middle_name , :class => "form-control" %>
+            </div>
+            <div class ="form-group">
+                <%= f.label :lastname %>
+                <%= f.text_field :last_name, :class => "form-control"  %>
+            </div>
+            <div class ="form-group">
+                <%= f.label :dateofbirth %>
+                <%= f.text_field :date_of_birth , :class => "form-control" %>
+            </div>
+           <div class ="form-group">
+                <%= f.label :address %>
+                <%= f.text_area :address , :class => "form-control" %>
+            </div>
+            <div class ="form-group">
+                <%= f.label :contactnumber %>
+                <%= f.text_field :contact_number, :class => "form-control"  %>
+            </div>
+            <div class ="form-group">
+                <%= f.label :email %>
+                <%= f.text_field :email, :class => "form-control"  %>
+            </div>
+           <div class ="form-group">
+                <%= f.label :gender %>
+                <%= f.text_field :gender, :class => "form-control"  %>
+            </div>
+            <div class ="form-group">
+                <%= f.label :qualification %>
+                <%= f.text_field :qualification, :class => "form-control"  %>
+            </div>
+            <div class ="form-group">
+                <%= f.label :experience %>
+                <%= f.text_field :experience, :class => "form-control"  %>
+            </div>
+                <div class ="form-group">
+              <%= f.label :password %>
+                <%= f.text_field :password, :class => "form-control"  %>
+            </div>
+            <div class ="form-group">
+                <%= f.submit "Create", :class => "btn" %>
+            </div>
+            <% end %>
+            </form>
+<%end%>

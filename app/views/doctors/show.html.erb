@@ -1,0 +1,32 @@
+<%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :show %>
+<h3><%=h @doctor.first_name %></h3>
+<table class ="table">
+    <tr><th>Name:</th>
+        <td><%=h @doctor.first_name %></td></tr>
+  <tr><th>Date of Birth</th>
+      <td><%=h @doctor.date_of_birth %></td></tr>
+
+    <tr><th>Address</th>
+        <td><%=h @doctor.address %></td></tr>
+
+    <tr><th>Contact Number</th>
+        <td><%=h @doctor.contact_number %></td></tr>
+
+    <tr><th>Gender</th>
+        <td><%=h @doctor.gender %></td></tr>
+
+    <tr><th>E mail</th>
+        <td><%=h @doctor.email %></td>
+
+    <tr><th> Qualification</th>
+        <td><%=h @doctor.qualification %></td></tr>
+
+    <tr><th>Experience</th>
+        <td><%=h @doctor.experience %></td></tr>
+
+    <tr><th>Department name</th>
+    <td><%=h @department.name %></td></tr>
+</table>
+<%end%>

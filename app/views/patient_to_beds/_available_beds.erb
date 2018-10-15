@@ -1,0 +1,3 @@
+<label>Select a Bed</label>
+<%= select_tag :bed, options_for_select(@beds.map{|p| [p.bed_number, p.id]}) ,  :class => "form-control"%>
+<%= submit_tag :create , :class => "btn mt-3" %>

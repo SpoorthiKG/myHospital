@@ -1,0 +1,23 @@
+
+<%if @patients.present?%>
+<table class ="table table-hover">
+    <thead>
+  <tr>
+    <th scope="col">Name</th>
+  </tr>
+    </thead>
+    <tbody>
+<% for patient in @patients %>
+  <tr>
+    <td><%=h patient.patient.first_name%></td>
+   
+  </tr>
+<% end %>
+    </tbody>
+</table>
+<%else%>
+<h2> No </h2>
+<%end%>
+<br />
+
+

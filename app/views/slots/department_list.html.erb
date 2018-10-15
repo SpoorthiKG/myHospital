@@ -1,0 +1,11 @@
+<table>
+    <tr>
+        <td><b>Department Name</b></td>
+    </tr>
+    <% for department in @departments %>
+    <tr>
+        <td><%=h department.name%></td>
+        <td><%= link_to "doctors", department_doctor_list_slots_path%> </td>
+    </tr>
+          <% end %>
+</table>

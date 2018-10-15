@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  slot_start_time: 2018-09-19 18:23:38
+  slot_end_time: 2018-09-19 18:23:38
+  slot_date: 2018-09-19
+
+two:
+  slot_start_time: 2018-09-19 18:23:38
+  slot_end_time: 2018-09-19 18:23:38
+  slot_date: 2018-09-19

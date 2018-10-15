@@ -1,0 +1,20 @@
+<%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<table class ="table mt-5">
+    <thead>
+        <tr>
+            <th>Appointment Date</th>
+            <th>Patient Name</th>
+            <th>Start Timming</th>   
+    </tr>
+    </thead>
+    <tbody>
+    <% @appointments.each do |appointment| %>
+        <tr>
+            <td><%= appointment.appointment_date %></td>
+            <td><%= appointment.patient.first_name%></td>
+            <td><%= appointment.slot.slot_start_time%></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>

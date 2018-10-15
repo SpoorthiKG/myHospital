@@ -1,0 +1,32 @@
+<%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :index %>
+<%if @doctor_suggested_patients.present?%>
+<h3>Listing Patients to be allocated bed</h3>
+<table class = "table table-hover">
+    <thead>
+  <tr>
+    <th scope = "col">Patient Name</th>
+    <th scope = "col">Suggested Doctor</th>
+    <th scope = "col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+<% @doctor_suggested_patients.each do |doctor_suggested_patient| %>
+  <tr>
+    <td><%= doctor_suggested_patient.patient.first_name %></td>
+    <td><%= doctor_suggested_patient.doctor.first_name %></td>
+    <td class = "allot_bed"><%= link_to "allot bed", new_patient_patient_to_bed_path(doctor_suggested_patient.patient)%></td>
+  </tr>
+  
+<% end %>
+   </tbody>
+  <%else%>
+  <h2>No Patients</h2>
+  <%end%>
+</table>
+<br />
+<%= link_to "Back", view_users_path %>     
+ <%end%>       
+       
+          

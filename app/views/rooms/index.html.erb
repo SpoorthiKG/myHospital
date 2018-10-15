@@ -1,0 +1,31 @@
+<%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :index %>
+<%if @rooms.present?%>
+<h3 class ='mt-5'>Listing Rooms</h3>
+<table class = "table table-hover mt-3">
+    <thead>
+  <tr>
+    <th scope = "col">Room Number</th>
+    <th scope = "col">Total Beds</th>
+    <th scope = "col">Vacant Beds</th>
+  </tr>
+    </thead>
+    <tbody>
+<% @rooms.each do |room| %>
+  <tr>
+    <td><%= room.room_number %></td>
+    <td><%= room.beds.count %></td>
+    <td><%= room.beds.count(:conditions => "vacant = true") %></td>
+  </tr>
+  
+<% end %>
+   </tbody>
+</table>
+<button type = "button" class = "btn btn-warning mr-3"><%= link_to 'New Rom', new_room_path %></button>
+<button type = "button" class = "btn btn-warning mr-3"><%= link_to 'Export CSV', export_csv_records_rooms_path %></button>
+<br />
+<%else%>
+  <h2 class ='mt-5'>No Rooms</h2>
+  <%end%>
+<% end %>

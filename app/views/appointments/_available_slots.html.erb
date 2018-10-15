@@ -1,0 +1,5 @@
+<label>Available slots are</label>
+<%= select_tag :slot, options_for_select(@slots.map{|p| [p.slot_start_time, p.id]}) ,  :class => "form-control"  %>
+<%= submit_tag :create , :class => "btn mt-3" %>
+
+

@@ -1,0 +1,2 @@
+module PatientToBedHelper
+end

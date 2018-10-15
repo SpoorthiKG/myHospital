@@ -1,0 +1,30 @@
+<%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :index %>
+<%if @doctors.present?%>
+<table class ="table table-hover">
+    <thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope = "col">Qualification</th>
+    <th scope = "col">Action</th>
+    <th scope ="col"></th>
+  </tr>
+    </thead>
+    <tbody>
+<% for doctor in @doctors %>
+  <tr>
+    <td><%=h doctor.first_name%></td>
+    <td><%=h doctor.qualification %></td>
+    <td><%= link_to 'Show', department_doctor_path(@department, doctor) %><br/>
+    <td><%= link_to 'Slot', new_doctor_slot_path(doctor) %><br/>
+  </tr>
+<% end %>
+    </tbody>
+</table>
+<%else%>
+<h2> No </h2>
+<%end%>
+<br />
+<%= link_to 'Back to Department', departments_path %>
+<%end%>

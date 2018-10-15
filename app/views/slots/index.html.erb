@@ -1,0 +1,21 @@
+<%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :index %>
+<h3 class ='mt-5'>Creating Slots For Doctors</h3>
+<table class = "table table-hover">
+    <thead>
+  <tr>
+    <th scope = "col">Name</th>
+    <th scope ="col">Action</th>
+  </tr>
+    </thead>
+    <tbody>
+<% for doctor in @doctors %>
+  <tr>
+    <td><%=h doctor.first_name%></td>
+    <td><%= link_to 'New Slot', new_doctor_slot_path(doctor) %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<% end %>

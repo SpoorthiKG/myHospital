@@ -1,0 +1,20 @@
+ <div class ="row">
+      <div class = "col-3 ml-auto w-25">
+              <div class="card card-body mb-2">
+                                      New Patient??<br/>
+                                      <%= link_to "Sign up",new_patient_path%>
+              </div>
+      </div>
+</div>
+<div class = "row">
+      <div class = "col">
+            <div class = "mx-auto text-center p-5">
+                  <% form_for :user , :url => {:action => :signin , :controller => :users} do  |f| %>
+                           Username:</br> <%= f.text_field :first_name%> <br/>
+                          Password:</br> <%= f.password_field :password%><br/>
+                  <%= f.submit :signin , :class => "mt-3"%>
+                  <% end %>
+                              
+            </div>
+      </div>
+</div>

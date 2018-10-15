@@ -1,0 +1,20 @@
+<% if permitted_to? :show %>
+<p>
+  <b>Name:</b>
+  <%=h @department.name %>
+</p>
+
+<p>
+  <b>Description</b>
+  <%=h @department.description %>
+</p>
+
+
+<%if @user.is_admin%>
+  <%= link_to 'Manage Doctors', department_doctors_path(@department) %>
+  <%= link_to 'Back', departments_path %>
+<% else %>
+  <%= link_to "Available Doctors" , department_doctors_path(@department) %>
+  <%= link_to 'Back', department_list_patients_path %>
+<%end%>
+<%end%>

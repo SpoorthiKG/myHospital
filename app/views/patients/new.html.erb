@@ -1,0 +1,50 @@
+<h5>New User</h5>
+            <% form_for @patient do |f| %>
+            <%= f.error_messages %>
+            <form>
+            <div class ="form-group">
+                <%= f.label :first_name %>
+                <%= f.text_field :first_name , :class => "form-control" %>
+            </div>
+            <div class ="form-group">
+                <%= f.label :middle_name %>
+                <%= f.text_field :middle_name , :class => "form-control" %>
+            </div>
+            <div class ="form-group">
+                <%= f.label :lastname %>
+                <%= f.text_field :last_name, :class => "form-control"  %>
+            </div>
+            <div class ="form-group">
+                <%= f.label :dateofbirth %>
+                <%= f.text_field :date_of_birth , :class => "form-control" %>
+            </div>
+           <div class ="form-group">
+                <%= f.label :address %>
+                <%= f.text_area :address , :class => "form-control" %>
+            </div>
+            <div class ="form-group">
+                <%= f.label :contactnumber %>
+                <%= f.text_field :contact_number, :class => "form-control"  %>
+            </div>
+            <div class ="form-group">
+                <%= f.label :email %>
+                <%= f.text_field :email, :class => "form-control"  %>
+            </div>
+           <div class ="form-group">
+                <%= f.label :gender %>
+                <%= f.text_field :gender, :class => "form-control"  %>
+            </div>
+            <div class ="form-group">
+                <%= f.label :blood_group %>
+                <%= f.text_field :blood_group, :class => "form-control"  %>
+            </div>
+            
+                <div class ="form-group">
+              <%= f.label :password %>
+                <%= f.text_field :password, :class => "form-control"  %>
+            </div>
+            <div class ="form-group">
+                <%= f.submit "Create", :class => "btn" %>
+            </div>
+            <% end %>
+            </form>

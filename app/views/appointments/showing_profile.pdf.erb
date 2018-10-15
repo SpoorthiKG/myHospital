@@ -1,0 +1,24 @@
+<h3><%=h @appointment.patient.first_name %></h3>
+<table class ="table">
+    <tr><th>Name:</th>
+        <td><%=h @appointment.patient.first_name %></td></tr>
+  <tr><th>Date of Birth</th>
+      <td><%=h @appointment.patient.date_of_birth %></td></tr>
+
+    <tr><th>Address</th>
+        <td><%=h @appointment.patient.address %></td></tr>
+
+    <tr><th>Contact Number</th>
+        <td><%=h @appointment.patient.contact_number %></td></tr>
+
+    <tr><th>Gender</th>
+        <td><%=h @appointment.patient.gender %></td></tr>
+
+    <tr><th>E mail</th>
+        <td><%=h @appointment.patient.email %></td>
+
+    <tr><th> Blood Group</th>
+        <td><%=h @appointment.patient.blood_group %></td></tr>
+
+</table>
+<%end%>

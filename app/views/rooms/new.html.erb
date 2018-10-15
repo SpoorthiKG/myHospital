@@ -1,0 +1,17 @@
+<%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :create %>
+<h5 class = 'mt-5'>New Room</h5>
+            <%  form_for @room  do |f| %>
+            <%= f.error_messages %>
+            <form>
+            <div class ="form-group">
+                <%= f.label :room_number %><br/>
+                <%= f.text_field :room_number, :class => "form-control" %><br/>
+            </div>
+            
+                <%= f.submit "Create", :class => "btn"%>
+            
+            <% end %>
+            </form>
+<% end %>

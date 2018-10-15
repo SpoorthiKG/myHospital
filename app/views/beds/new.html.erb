@@ -1,0 +1,15 @@
+<% if permitted_to? :create %>
+<% form_for @bed do |f|%>
+<%= f.error_messages %>
+ <%= f.hidden_field :room_id, :value => params[:room_id] %>
+   <form>
+            <div class ="form-group">
+                <%= f.label :bed_number %>
+                <%= f.text_field :bed_number , :class => "form-control" %>
+            </div>
+       <div class ="form-group">
+                <%= f.submit "Create", :class => "btn" %>
+            </div>
+   </form>
+<%end%>
+<%end%>
