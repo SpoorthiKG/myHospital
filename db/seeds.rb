@@ -4,7 +4,7 @@
 # Examples:
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Major.create(:name => 'Daley', :city => cities.first)
+#   Major.create(:name => 'Daley', :city => cities.first
 admin = User.new()
 admin.first_name = "Admin"
 admin.middle_name = "User"
@@ -14,7 +14,7 @@ admin.address ="banglore"
 admin.contact_number = "8792099635"
 admin.email ="spoorthi0811@gmail.com"
 admin.user_determin_type = "admin"
-admin.encrypted_password = "f865b53623b121fd34ee5426c792e5c33af8c227"
+admin.encrypted_password = Digest::SHA1.hexdigest("admin123")
 admin.gender="F"
 admin.is_admin = 1
 admin.save
