@@ -12,7 +12,7 @@ class PatientsController < ApplicationController
     if @patient.save
       redirect_to view_patients_path
     else
-      render 'new'
+      render :new
     end
   end
   def view
@@ -33,9 +33,8 @@ class PatientsController < ApplicationController
     if params[:patient][:new_password].present?
         if @patient.update_attributes(:password => params[:patient][:new_password])
          flash[:notice] = "You have successfully changed your password"
-         redirect_to :action => "view"    
+         redirect_to view_users_path    
        else
-        puts "else"
         flash[:notice] = "Oops! Somethng went wrong"
         render change_password
         end

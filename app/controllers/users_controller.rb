@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  
   def index
     @users = User.all
   end
@@ -12,20 +13,23 @@ class UsersController < ApplicationController
   end
   
   def signin
-    @user = User.authenticated?(params[:user][:first_name],params[:user][:password])
-    if @user.present?
+    if @user = User.authenticated?(params[:user][:first_name],params[:user][:password])
       session[:user_id] = @user.id
       flash[:notice] = "welcome #{@user.first_name}"    
-      if @user.user_determin_type == "patient"
-        redirect_to view_patients_path
-      elsif @user.user_determin_type == "doctor"
-        redirect_to view_doctors_path
-      else
-        redirect_to view_users_path
-      end
+      redirect_to view_users_path
     else
       flash[:notice] = "Invalid username and password"
       redirect_to root_path
+    end
+  end
+  def patient_selection
+    @patients = Patient.all
+  end
+  
+  def adding_previous_histroy
+    @histroys = DischargedPatient.find_all_by_patient_id(params[:id])
+    render :update do |page|
+      page.replace_html 'adding_previous_histroy', :partial => "adding_previous_histroy"
     end
   end
 

@@ -1,0 +1,30 @@
+<br/><%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span>
+<% if permitted_to? :total_slots %><br/>
+<p style="color: blue"><%= flash[:notice] %></p>
+<% if @slots.present? %>
+<br/><table class = "table table-hover">
+    <thead>
+  <tr>
+    <th scope = "col">Slot Start Time</th>
+    <th scope ="col">Slot End Time</th>
+    <th></th>
+  </tr>
+    </thead>
+    <tbody>
+<% @slots.each do |slot| %>
+  <tr>
+    <td><%= slot.slot_start_time%></td>
+    <td><%= slot.slot_end_time%></td>
+    <td><%= link_to "Delete",doctor_slot_path(@doctor,slot), :confirm => 'Are you sure?',
+            :method => :delete %> </td>
+  </tr>
+<% end %>
+  <% else %>
+    <br/><h2 style = "color:red;">No Appointments</h2>
+    <% end %>
+</tbody>
+</table>
+<button class="btn btn-warning"><%= link_to "Create Slot", new_doctor_slot_path(params[:id])%></button>
+<% end %>

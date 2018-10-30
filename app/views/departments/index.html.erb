@@ -1,6 +1,8 @@
-<%= make_breadcrumb %>   
+<br/><%= make_breadcrumb %>   
  <%= render_breadcrumbs  %>
-<% if permitted_to? :index %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span>
+<% if permitted_to? :index %><br/>
+<p style="color: blue"><%= flash[:notice] %></p>
 <%if @departments.present?%>
 <h3 class ='mt-5'>Listing departments</h3>
 <table class = "table table-hover">
@@ -9,6 +11,7 @@
     <th scope = "col">Name</th>
     <th scope = "col">Description</th>
     <th scope = "col">Action</th>
+    <th></th>
   </tr>
     </thead>
     <tbody>
@@ -18,14 +21,18 @@
     <td><%=h department.description %></td>
     <td><%= link_to 'View Doctors', department_doctors_path(department) %><br/>
     <%= link_to 'Add Doctor', new_department_doctor_path(department) %></td>
+    <td><%= link_to 'Edit',edit_department_path(department) %><br/>
+    <%= link_to 'Delete',department, :confirm => 'Are you sure?',
+            :method => :delete %></td>
   </tr>
   
 <% end %>
    </tbody>
   <%else%>
-  <h2 class ='mt-5'>No departments</h2>
+ <br/> <h2 class ='mt-5' style ="color:red;">No departments</h2>
   <%end%>
 </table>
 <br />
-<button type = "button" class = "btn btn-warning"><%= link_to 'New Department', new_department_path %></button>
+<button type = "button" class = "btn btn-warning"><%= link_to 'New Department', 
+  new_department_path %></button>
 <%end%>

@@ -1,13 +1,14 @@
-<%= make_breadcrumb %>   
+<br/><%= make_breadcrumb %>   
  <%= render_breadcrumbs  %>
 <% if permitted_to? :create %>
-<h5 class = 'mt-5'>New Room</h5>
+<span style="float:right;"><%= link_to "logout", logout_path %></span><br/>
+<h5 class = 'mt-5'>New Room</h5><br/>
             <%  form_for @room  do |f| %>
             <%= f.error_messages %>
             <form>
             <div class ="form-group">
                 <%= f.label :room_number %><br/>
-                <%= f.text_field :room_number, :class => "form-control" %><br/>
+                <%= f.text_field :room_number, :class => "form-control", :placeholder => 'Format-111' %><br/>
             </div>
             
                 <%= f.submit "Create", :class => "btn"%>

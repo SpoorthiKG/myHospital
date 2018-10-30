@@ -1,6 +1,6 @@
 <%=puts "coming to available"%>
 <%=puts "==================#{@doctors.inspect}"%>
 <label>Select a Doctor</label>
-<%= select_tag :doctor, options_for_select(@doctors.map{|p| [p.first_name, p.id]}) ,  :class => "form-control" , :onchange => "show_the_doctor(this.value)" %>
+<%= select_tag :doctor, options_for_select(@doctors.map{|p| [p.first_name, p.id]}.insert(0, "select a Doctor")) ,  :class => "form-control" , :onchange => "show_the_doctor(this.value)" %>
  
   

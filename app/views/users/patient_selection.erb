@@ -1,0 +1,17 @@
+<br/><%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :patient_selection %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span><br/>
+<label class = 'mt-5'>Select a Patient</label>
+<%= select_tag :medicalreport, options_for_select(@patients.map{|p| [p.first_name, p.id]}.insert(0, "Select a Patient"))  , :class => "form-control mt-3" , :onchange => "show_the_value(this.value);" %>
+<div id ="adding_previous_histroy" style="margin-top: 10px;"></div>
+<% end %>
+<script>
+  function show_the_value(patient_id){
+    jQuery.ajax({
+            url : '/users/adding_previous_histroy',
+            data: {id: patient_id}
+          });
+          
+     }
+</script>

@@ -1,5 +1,8 @@
-<%= make_breadcrumb %>   
+<br/><%= make_breadcrumb %>   
  <%= render_breadcrumbs  %>
+<% if permitted_to? :appointments%>
+<span style="float:right;"><%= link_to "logout", logout_path %></span><br/>
+<% if @appointments.present? %>
 <table class ="table mt-5">
     <thead>
         <tr>
@@ -13,8 +16,12 @@
         <tr>
             <td><%= appointment.appointment_date %></td>
             <td><%= appointment.patient.first_name%></td>
-            <td><%= appointment.slot.slot_start_time%></td>
+            <td><%= appointment.slot.slot_end_time%></td>
     </tr>
     <% end %>
     </tbody>
 </table>
+<% else %>
+<h5 style ="color:red;">No appointments</h5>
+<%end%>
+<%  end %>

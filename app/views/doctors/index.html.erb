@@ -1,8 +1,10 @@
-<%= make_breadcrumb %>   
+<br/><%= make_breadcrumb %>   
  <%= render_breadcrumbs  %>
-<% if permitted_to? :index %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span>
+<% if permitted_to? :index %><br/>
+ <p style="color: blue"><%= flash[:notice] %></p>
 <%if @doctors.present?%>
-<table class ="table table-hover">
+ <br/><table class ="table table-hover">
     <thead>
   <tr>
     <th scope="col">Name</th>
@@ -17,12 +19,15 @@
     <td><%=h doctor.first_name%></td>
     <td><%=h doctor.qualification %></td>
     <td><%= link_to 'Show', department_doctor_path(@department, doctor) %><br/>
+    <td><%= link_to 'Edit',edit_department_doctor_path(@department,doctor) %><br/>
+    <%= link_to 'Delete',department_doctor_path(@department,doctor), :confirm => 'Are you sure?',
+            :method => :delete  %> </td>
   </tr>
 <% end %>
     </tbody>
 </table>
 <%else%>
-<h2> No </h2>
+ <br/><h2 style ="color:red;"> No Doctors </h2>
 <%end%>
-<br />
+<%= link_to "Add Doctors",new_department_doctor_path(@department) %>
 <%end%>

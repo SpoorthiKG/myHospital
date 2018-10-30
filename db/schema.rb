@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(:version => 20181015112440) do
 
   create_table "doctor_suggested_patients", :force => true do |t|
     t.boolean  "to_be_admitted"
+    t.integer  "doctor_id"
     t.integer  "patient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "doctor_id"
   end
 
   create_table "doctors", :force => true do |t|

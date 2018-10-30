@@ -1,2 +1,17 @@
-<h1>Beds#index</h1>
-<p>Find me in app/views/beds/index.html.erb</p>
+<br/><%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :index %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span><br/>
+<p style="color: blue"><%= flash[:notice] %></p>
+<br/><label class = 'mt-5'>Select a Room</label>
+<%= select_tag :room, options_for_select(@rooms.map{|p| [p.room_number, p.id]}.insert(0, "Select a Room"))  , :class => "form-control mt-3", :onchange => "show_the_value(this.value)" %>
+<div id ="listing_beds" style="margin-top: 10px;"></div>
+<%end%>
+<script>
+  function show_the_value(room_id){
+    jQuery.ajax({
+            url : '/beds/listing_beds',
+            data: {id: room_id}
+          });
+     }
+     </script>

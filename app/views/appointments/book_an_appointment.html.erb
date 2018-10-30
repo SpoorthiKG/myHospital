@@ -1,10 +1,11 @@
-<%= make_breadcrumb %>   
+<br/><%= make_breadcrumb %>   
  <%= render_breadcrumbs  %>
-<% if permitted_to? :create, Appointment.new%>
+<% if permitted_to? :create%>
+<span style="float:right;"><%= link_to "logout", logout_path %></span><br/>
 <% form_for :appointment, :url => {:controller => :appointments, :action => :create} do |f| %>
 <%= f.error_messages %>
 <label class = 'mt-5'>Select a Department</label>
-<%=  select_tag :department, options_for_select(@departments.map{|p| [p.name, p.id]})  , :class => "form-control", :onchange => "show_the_value(this.value)" %>
+<%=  select_tag :department, options_for_select(@departments.map{|p| [p.name, p.id]}.insert(0, "select a Department"))  , :class => "form-control", :onchange => "show_the_value(this.value)" %>
 <div id ="available_doctors" style="margin-top: 10px;"></div>
 <div id ="available_slots" style="margin-top: 10px;"></div>
 <!--<%= f.submit "Create", :class => "btn"%>-->

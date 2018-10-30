@@ -1,6 +1,7 @@
-<%= make_breadcrumb %>   
+<br/><%= make_breadcrumb %>   
  <%= render_breadcrumbs  %>
 <% if permitted_to? :recommend_patient %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span><br/>
 <%if @appointments.present?%>
 <h3 class = 'mt-5'>Listing Patients</h3>
 <table class = "table table-hover mt-3">
@@ -12,29 +13,32 @@
     </thead>
     <tbody>
 <% @appointments.each do |appointment| %>
-  <tr id = "col-<%= appointment.id  %>">
+  <tr>
     <td id = "name"><%= appointment.patient.first_name %></td>
     <td class = "cur_doctor_id" style="display: none"><%= appointment.doctor_id %></td>
     <td class = "cur_patient_id" style="display: none"><%= appointment.patient_id %></td>
-    <td id="cur_button"><button  id = "btn_disable" type = "button"  class = "btn btn-warning" onclick = "display_the_message(<%=appointment.patient_id%>);">Admit</button></td>
+    <td id="cur_button"><button  id = "btn_disable" type = "button"  class = "btn btn-warning" onclick = "display_the_message(<%=appointment.patient_id%>,<%= appointment.doctor_id %>);">Admit</button></td>
   </tr>
   
 <% end %>
    </tbody>
   <%else%>
-  <h2 class = 'mt-5'>No Patients</h2>
+ <br/> <h2 class = 'mt-5' style ="color:red;">No Patients</h2>
   <%end%>
 </table>
 <br />
 <%end%>
 <script>
-
-  function display_the_message(patient_id){
-    var doctor_id = jQuery('#cur_button').prev().prev().text();
+  function display_the_message(patient_id,doctor_id){
     jQuery.ajax({
              url : '/doctor_suggested_patients/new',
             data: {id: patient_id, doc_id: doctor_id}
      });
     alert("The patient has been suggessted to admit for admin");
   }
+  jQuery('.btn').on('click', function(e) {
+    jQuery(this).prop('disabled',true);
+    jQuery(this).text("Requested");
+    e.preventDefault();
+});
 </script>

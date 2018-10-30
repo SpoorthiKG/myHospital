@@ -1,0 +1,30 @@
+<%if @beds.present?%>
+<h3 class = "mt-5">Listing Beds</h3>
+<table class = "table table-hover">
+    <thead>
+  <tr>
+    <th scope = "col">Bed Number</th>
+    <th></th>
+  </tr>
+    </thead>
+    <tbody>
+<% @beds.each do |bed| %>
+  <tr>
+      <td><%=  bed.bed_number%></td>
+      <td><%= link_to "Delete",bed, :confirm => 'Are you sure?',
+            :method => :delete  %></td>
+  </tr>
+  
+<% end %>
+   </tbody>
+  <%else%>
+   <br/><h5 style = "color:red;text-align:center">No beds</h5>
+  <%end%>
+</table>
+<span id="clickable"><%= link_to_remote "Add Bed", :url => {:action => 'new_bed',:room_id=>params[:id]}%></span>
+<div id ="new_bed" style="margin-top: 10px;"></div>
+<script>
+  jQuery('#clickable').click(function(){
+    jQuery('#clickable').hide();
+  })
+  </script>

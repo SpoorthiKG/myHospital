@@ -1,8 +1,10 @@
-<%= make_breadcrumb %>   
+<br/><%= make_breadcrumb %>   
  <%= render_breadcrumbs  %>
 <% if permitted_to? :index %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span><br/>
+ <p style="color: blue"><%= flash[:notice] %></p>
 <%if @patient_to_beds.present?%>
-<h3 class='mt-5'>Listing  Admitted Patients</h3>
+ <br/><h3 class='mt-5'>Listing  Admitted Patients</h3>
 <table class = "table table-hover">
     <thead>
   <tr>
@@ -22,8 +24,7 @@
 <% end %>
    </tbody>
   <%else%>
-  <h2 class='mt-5'>No Patients</h2>
+ <br/> <h2 class='mt-5' style ="color:red;">No Patients</h2>
   <%end%>
 </table>
-<br />
 <% end %>

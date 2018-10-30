@@ -1,2 +1,18 @@
-<h1>Medicalreports#index</h1>
-<p>Find me in app/views/medicalreports/index.html.erb</p>
+<br/><%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :index %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span>
+<br/>
+<label class = 'mt-5'>Select a Patient</label>
+<%= select_tag :medicalreport, options_for_select(@patients.map{|p| [p.first_name, p.id]}.insert(0, "Select a Patient"))  , :class => "form-control mt-3" , :onchange => "show_the_value(this.value);" %>
+<div id ="adding_report" style="margin-top: 10px;"></div>
+<%  end %>
+<script>
+  function show_the_value(patient_id){
+    jQuery.ajax({
+            url : '/medicalreports/adding_report',
+            data: {id: patient_id}
+          });
+          
+     }
+</script>

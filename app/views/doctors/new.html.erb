@@ -1,6 +1,7 @@
-<%= make_breadcrumb %>   
+<br/><%= make_breadcrumb %>   
  <%= render_breadcrumbs  %>
 <% if permitted_to? :create %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span>
             <h5 class = 'mt-5'>New User</h5>
             <% form_for @doctor do |f| %>
             <%= f.error_messages %>
@@ -21,11 +22,11 @@
             </div>
             <div class ="form-group">
                 <%= f.label :dateofbirth %>
-                <%= f.text_field :date_of_birth , :class => "form-control" %>
+                <%= f.text_field :date_of_birth , :class => "form-control datepicker", :id => "datepicker" %>
             </div>
            <div class ="form-group">
                 <%= f.label :address %>
-                <%= f.text_area :address , :class => "form-control" %>
+                <%= f.text_area :address , :class => "form-control",:rows=>7 %>
             </div>
             <div class ="form-group">
                 <%= f.label :contactnumber %>
@@ -37,7 +38,7 @@
             </div>
            <div class ="form-group">
                 <%= f.label :gender %>
-                <%= f.text_field :gender, :class => "form-control"  %>
+                <%=  f.select :gender, options_for_select(["male","female"].insert(0,'select a gender')),:class => "selectpicker", :id=>"sel1" %>
             </div>
             <div class ="form-group">
                 <%= f.label :qualification %>
@@ -47,13 +48,15 @@
                 <%= f.label :experience %>
                 <%= f.text_field :experience, :class => "form-control"  %>
             </div>
-                <div class ="form-group">
-              <%= f.label :password %>
-                <%= f.text_field :password, :class => "form-control"  %>
-            </div>
             <div class ="form-group">
                 <%= f.submit "Create", :class => "btn" %>
             </div>
             <% end %>
             </form>
 <%end%>
+           <script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#datepicker').datepicker({
+    });
+});
+</script>

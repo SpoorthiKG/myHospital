@@ -1,14 +1,17 @@
-<%= make_breadcrumb %>   
+<br/><%= make_breadcrumb %>   
  <%= render_breadcrumbs  %>
 <% if permitted_to? :index %>
-<%if @doctor_suggested_patients.present?%>
-<h3>Listing Patients to be allocated bed</h3>
+ <span style="float:right;"><%= link_to "logout", logout_path %></span><br/>
+ <p style="color: blue"><%= flash[:notice] %></p>
+<%if @doctor_suggested_patients.present?%><br/>
+<br/><h3>Listing Patients to be allocated bed</h3>
 <table class = "table table-hover">
     <thead>
   <tr>
     <th scope = "col">Patient Name</th>
     <th scope = "col">Suggested Doctor</th>
     <th scope = "col">Action</th>
+    <th></th>
       </tr>
     </thead>
     <tbody>
@@ -17,16 +20,16 @@
     <td><%= doctor_suggested_patient.patient.first_name %></td>
     <td><%= doctor_suggested_patient.doctor.first_name %></td>
     <td class = "allot_bed"><%= link_to "allot bed", new_patient_patient_to_bed_path(doctor_suggested_patient.patient)%></td>
+    <td><%= link_to "Delete",doctor_suggested_patient, :confirm => 'Are you sure?',
+            :method => :delete  %> </td>
   </tr>
   
 <% end %>
    </tbody>
   <%else%>
-  <h2>No Patients</h2>
+   <br/><h2 style ="color:red;">No Patients</h2>
   <%end%>
-</table>
-<br />
-<%= link_to "Back", view_users_path %>     
+</table> 
  <%end%>       
        
           

@@ -1,12 +1,13 @@
-<%= make_breadcrumb %>   
- <%= render_breadcrumbs  %>
 <% if permitted_to? :create%>
+<br/><%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span>
 <br/><label class='mt-3'>Select a Patient</label>
-
 <% form_for @medicalreport , :html => { :multipart => true } do |form| %>
-<%= select_tag :patients, options_for_select(@appointments.map{|p| [p.patient.first_name, p.patient.id]})  , :class => "form-control" %><br/>
+<%= form.error_messages %>
+<%= select_tag :patients, options_for_select(@appointments.map{|p| [p.patient.first_name, p.patient.id]}.insert(0,"Select a Patient"))  , :class => "form-control" %><br/>
 <%= form.label :comments %>
-<%= form.text_area :comments , :class => "form-control"%><br/>
+<%= form.text_area :comments , :class => "form-control", :rows=>7%><br/>
 <%= form.label :medication %>
 <%= form.text_field :medication , :class => "form-control"%><br/>
   <%= form.file_field :record ,:class => "mt-3"%><br/>

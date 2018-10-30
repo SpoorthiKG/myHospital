@@ -1,17 +1,17 @@
 ActionController::Routing::Routes.draw do |map|
   # The priority is based upon order of creation: first created -> highest priority.
   map.resources :patients, :has_many => :appointments , :has_one => :patient_to_bed, :through => :doctor_suggested_patients ,:collection => { :change_password => :get,:view => :get , :department_list => :get, :previous_histroy => :get}
-  map.resources :users , :collection => { :login => :get , :view => :get}
+  map.resources :users , :collection => { :login => :get , :view => :get,:patient_selection => :get,:adding_previous_histroy => :get}
   map.resources :doctors , :has_many => :appointments, :has_many => :patients , :has_many => :slots, :collection => { :view => :get, :recommend_patient => :get,:change_password=>:get,:patients_being_treated => :get,:showing=>:get}
   map.resources :departments, :has_many => :doctors
-  map.resources :slots , :has_one => :appointment, :has_one => :patient, :through => :appointment,  :collection => { :department_list => :get, :department_doctor_list => :get}
-  map.resources :appointments ,:has_many => :medicalreports, :collection => {:no_slots => :get,:available_doctors => :get, :book_an_appointment => :get, :available_slots => :get, :appointments => :get}
+  map.resources :slots , :has_one => :appointment, :has_one => :patient, :through => :appointment,  :collection => { :department_list => :get, :department_doctor_list => :get},:member => {:total_slots => :get}
+  map.resources :appointments ,:has_many => :medicalreports, :collection => {:adding_appointment=>:get,:no_slots => :get,:available_doctors => :get, :book_an_appointment => :get, :available_slots => :get, :appointments => :get}
   map.resources :rooms, :has_many => :beds , :collection =>{:export_csv_records=> :get}
-  map.resources :beds,:has_many => :patient_to_beds, :has_many => :patients , :through => :patient_to_beds, :collection => {:adding_room => :get, :adding_bed => :get}
+  map.resources :beds,:has_many => :patient_to_beds, :has_many => :patients , :through => :patient_to_beds, :collection => {:new_bed=>:get,:listing_beds=>:get,:adding_room => :get, :adding_bed => :get}
   map.resources :doctor_suggested_patients , :has_many => :patients , :has_many => :doctors
   map.resources :patient_to_beds  , :collection => {:available_beds=> :get}
   map.resources :discharged_patients
-  map.resources :medicalreports, :has_many => :appointments,:has_one => :doctor , :has_one => :patient, :through=> :appointments, :collection => { :upload_file => :get,:record_view=>:get}
+  map.resources :medicalreports, :has_many => :appointments,:has_one => :doctor , :has_one => :patient, :through=> :appointments, :collection => {:adding_report => :get, :upload_file => :get,:record_view=>:get}
   map.logout '/logout', :controller => 'sessions',:action => 'destroy'
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'

@@ -1,54 +1,153 @@
- <%= make_breadcrumb %>   
- <%= render_breadcrumbs  %>
-<div class ="row">
-      <div class = "col-3 ml-auto w-25">
+ <div class ="row">
+      <div class = "col-3 ml-auto w-25 mt-3">
               <div class="card card-body mb-2">
                                    
                                       <%= link_to "logout", logout_path %>
               </div>
       </div>
 </div> 
-
+ <p style="color: blue"><%= flash[:notice] %></p>
 <div class = "row">
             <div class = "col">
+                <% if permitted_to? :index , :departments %>
                     <div class = "col-3 border border-info rounded float-left mr-5">
                   <%= link_to "department", departments_path%><br/>
                         <span>Lists all the Various Departments of this Hospital</span>
                 </div>
+                <% end %>
+                <% if permitted_to? :index , :slots %>
                     <div class = "col-3 border border-info rounded float-left mr-5" >
                         <%= link_to "create slots", slots_path %><br/>
                         <span>This can create the Slots for the Doctors</span>
                 </div>
-                    <div class = "col-3 border border-info rounded float-left">
+                <% end %>
+                <% if permitted_to? :index , :doctor_suggested_patients %>
+                    <div class = "col-3 border border-info rounded float-left mr-5">
                           <%= link_to "assign patient with bed" , doctor_suggested_patients_path %><br/>
                         <span>The patients can be assigned to the beds based on the Doctor</span>
                 </div>
+                <%end%>
                 
         </div>
 </div>
-<div class = "row mt-5">
+
+<div class = "row">
         <div class = "col">
-               <div class = "col-3 border border-info rounded float-left mr-5" >
+            <% if permitted_to? :index , :rooms %>
+               <div class = "col-3 border border-info rounded float-left mt-5 mr-5" >
                   <%= link_to "Rooms", rooms_path%><br/>
                         <span>Lists all the Various Rooms of this Hospital</span>
                 </div>
-            <div class = "col-3 border border-info rounded float-left mr-5">
+            <% end%>
+            <% if permitted_to? :adding_room , :beds %>
+            <div class = "col-3 border border-info rounded float-left mt-5 mr-5">
                         <%= link_to "Beds", adding_room_beds_path%><br/>
                         <span>The available beds inside the rooms of hospital</span>
                 </div>
-            <div class = "col-3 border border-info rounded float-left">
+            <% end %>
+            <% if permitted_to? :index , :patient_to_beds %>
+            <div class = "col-3 border border-info rounded float-left mt-5 mr-5">
                           <%= link_to "admitted patients" , patient_to_beds_path %><br/>
                         <span>Lists all the patients who are admitted </span>
                 </div>
-    </div>
-</div>
-<div class = "row mt-5">
-    <div class = "col">
-               <div class = "col-3 border border-info rounded float-left mr-5" >
-                  <%= link_to "Appointments", book_an_appointment_appointments_path%><br/>
-                        <span>Lists all the Various Rooms of this Hospital</span>
-                </div>
+            <%end%>
     </div>
 </div>
 
+<div class = "row ">
+            <div class = "col">
+                  <% if permitted_to? :index , :appointments %>
+                    <div class = "col-3 border border-info rounded float-left mt-5" style = "margin-right: 50px;">
+                        <%= link_to "Appointments", appointments_path %><br/>
+                        <span>Booked appointments with the doctor</span>    
+                    </div>
+                  <%end%>
+                <% if permitted_to? :book_an_appointment , :appointments %>
+                    <div class = "col-3 border border-info rounded float-left mt-5" style = "margin-right: 50px;">
+                        <%= link_to "Book an appointment", book_an_appointment_appointments_path %><br/>
+                        <span>Booking an appointment with the doctor</span>    
+                    </div>
+                <% end %>
+                <% if permitted_to? :index , :medicalreports %>
+         <div class = "col-3 border border-info rounded float-left mt-5" style = "margin-right: 50px;">
+                            <%= link_to "View Record", medicalreports_path %><br/>
+                            <span>The records and the previous admitted date are displayed</span>
+         </div>
+        <%end%>
+                <% if permitted_to? :record_view , :medicalreports %>
+         <div class = "col-3 border border-info rounded float-left mt-5" style = "margin-right: 50px;">
+                            <%= link_to "View Record", record_view_medicalreports_path %><br/>
+                            <span>The records and the previous admitted date are displayed</span>
+         </div>
+        <%end%>
+         <% if permitted_to? :previous_histroy , :patients %>
+         <div class = "col-3 border border-info rounded float-left mt-5" style = "margin-right: 50px;">
+                            <%= link_to "View Previous Histroy", previous_histroy_patients_path %><br/>
+                            <span>The records and the previous admitted date are displayed</span>
+         </div>
+        <%end%>        
+</div>
+</div>
+<div class = "row">
+    <div class = "col">
+        <% if permitted_to? :appointments , :appointments %>
+                    <div class = "col-3 border border-info rounded float-left mt-5" style = "margin-right: 50px;">
+                        <%= link_to "Appointments", appointments_appointments_path %><br/>
+                        <span>Booked appointments with the doctor</span>    
+                    </div>
+                  <%end%>
+        <% if permitted_to? :upload_file , :medicalreports %>
+        <div class = "col-3 border border-info rounded float-left mt-5" style = "margin-right: 50px;">
+                            <%= link_to "Upload records" , new_medicalreport_path%><br/>
+                            <span>The records of the patients can be uploaded</span>
+                </div>
+        <%end%>
+        
+        <% if permitted_to? :recommend_patient , :doctors %>
+        <div class = "col-3 border border-info rounded float-left mt-5" style = "margin-right: 50px;">
+           <%= link_to "Request for bed to patients", recommend_patient_doctors_path %><br/>
+                        <span>Can send the request for bed</span>
+        </div>
+        <%end%>
+    </div>
+</div>
+<div class = "row">
+    <div class = "col">
+        
+        <% if permitted_to? :patients_being_treated , :doctors %>
+        <div class = "col-3 border border-info rounded float-left mt-5" style = "margin-right: 50px;">
+                        <%= link_to "Patients Being Treated", patients_being_treated_doctors_path %><br/>
+                        <span>Booked appointments with the doctor</span>    
+                    </div>
+        <% end %>
+        <% if permitted_to? :change_password , :doctors %>
+       <div class = "col-3 border border-info rounded float-left mt-5">
+                        <%= link_to "change,reset password",change_password_doctors_path %><br/>
+                        <span>Chaning the credentials</span>
+                </div>
+        <%end%>
+    </div>
+</div>
+<div class = "row">
+    <div class = "col">
+        <% if permitted_to? :change_password , :patients %>
+        <div class = "col-3 border border-info rounded float-left mt-5">
+                        <%= link_to "change,reset password",change_password_patients_path %><br/>
+                        <span>Chaning the credentials</span>
+                </div>
+        <% end %>
+        
+ </div>
+</div>
+<div class = "row">
+    <div class = "col">
+        
+        <% if permitted_to? :index , :medicalreports %>
+         <div class = "col-3 border border-info rounded float-left mt-5" style = "margin-right: 50px;">
+                            <%= link_to "View Previous Histroy", patient_selection_users_path %><br/>
+                            <span>The records and the previous admitted date are displayed</span>
+         </div>
+        <%end%>
+ </div>
+</div>
                                                                                 

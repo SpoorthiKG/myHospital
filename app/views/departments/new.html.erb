@@ -1,9 +1,10 @@
-<%= make_breadcrumb %>   
- <%= render_breadcrumbs  %>
 <% if permitted_to? :create %>
+<br/><%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span>
             <h5 class='mt-5'>New Department</h5>
             <%  form_for @department  do |f| %>
-            <%= f.error_messages %>
+          <%= f.error_messages%>
             <form>
             <div class ="form-group">
                 <%= f.label :name %><br/>
@@ -17,4 +18,6 @@
             
             <% end %>
             </form>
+            <%else%>
+            <h2></h2>
  <%end%>

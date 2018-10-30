@@ -1,5 +1,6 @@
-<%= make_breadcrumb %>   
+<br/><%= make_breadcrumb %>   
  <%= render_breadcrumbs  %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span>
 <% if permitted_to? :show %>
 <h3><%=h @doctor.first_name %></h3>
 <table class ="table">

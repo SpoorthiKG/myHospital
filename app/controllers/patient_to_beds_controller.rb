@@ -1,4 +1,5 @@
 class PatientToBedsController < ApplicationController
+  filter_access_to :all
   def new
     @rooms = Room.all
     @patient_to_bed = PatientToBed.new
@@ -18,18 +19,16 @@ class PatientToBedsController < ApplicationController
   def create
     @rooms = Room.all
     @bed = Bed.find(params[:bed])
-    @bed.vacant = false
-    @bed.save
-    @patient_to_bed = PatientToBed.new(:bed_id=>params[:bed],:patient_id=>params[:patient_id],:vacated=>0, :admitted_on =>Time.now )
-    if @patient_to_bed.save
+    @patient_to_bed = PatientToBed.new(:bed_id=>params[:bed],:patient_id=>params[:patient_id],
+      :vacated=>0, :admitted_on =>Time.now )
+    if @patient_to_bed.save and @bed.update_attributes(:vacant=> false) 
       @doctor_suggested_patient = DoctorSuggestedPatient.find_by_patient_id(params[:patient_id])
       @doctor_suggested_patient.destroy
       flash[:notice] = "The patient is allotted a bed"
-      redirect_to doctor_suggested_patients_path
     else
       flash[:notice] = "Oops!!! Something went wrong! Try again "
-       redirect_to doctor_suggested_patients_path
     end
+    redirect_to doctor_suggested_patients_path
   end
 
   def index
@@ -38,20 +37,16 @@ class PatientToBedsController < ApplicationController
   def destroy
     @patient_to_bed = PatientToBed.find(params[:id])
     @bed = Bed.find(@patient_to_bed.bed_id)
-    @bed.vacant = true
-    @bed.save
+    @bed.update_attributes(:vacant=>true)  
     @discharged_patient = DischargedPatient.new(:bed_id => @patient_to_bed.bed_id,:patient_id => @patient_to_bed.patient_id,:admitted_on => @patient_to_bed.admitted_on,:discharged_on => Time.now)
-    @bed = Bed.find(@patient_to_bed.bed_id)
+    @discharged_patient.save
     @patient_to_bed.destroy
-    if @patient_to_bed.destroy
+    if @patient_to_bed.destroy and @bed.save and @discharged_patient.save
       flash[:notice] = "The patient has been discharged"
-      @bed.vacant = 1
-      @bed.save
-      redirect_to patient_to_beds_path
     else
       flash[:notice] = "something went wrong!! try again"
-      redirect_to patients_to_beds_path
     end
+    redirect_to patient_to_beds_path
   end
 
 end

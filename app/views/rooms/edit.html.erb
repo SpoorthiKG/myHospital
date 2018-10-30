@@ -1,0 +1,18 @@
+<br/><%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :edit %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span><br/>
+<br/><h3>Editing Room</h3>
+
+<% form_for(@room) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :room_number %><br />
+    <%= f.text_field :room_number, :class => "form-control"  %>
+  </p>
+  <p>
+    <%= f.submit "Update",:class => "btn" %>
+  </p>
+<% end %>
+  <% end %>

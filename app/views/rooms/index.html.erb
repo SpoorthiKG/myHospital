@@ -1,14 +1,17 @@
-<%= make_breadcrumb %>   
+<br/><%= make_breadcrumb %>   
  <%= render_breadcrumbs  %>
 <% if permitted_to? :index %>
+ <span style="float:right;"><%= link_to "logout", logout_path %></span><br/>
+ <p style="color: blue"><%= flash[:notice] %></p>
 <%if @rooms.present?%>
-<h3 class ='mt-5'>Listing Rooms</h3>
+ <br/><h3 class ='mt-5'>Listing Rooms</h3>
 <table class = "table table-hover mt-3">
     <thead>
   <tr>
     <th scope = "col">Room Number</th>
     <th scope = "col">Total Beds</th>
     <th scope = "col">Vacant Beds</th>
+    <th></th>
   </tr>
     </thead>
     <tbody>
@@ -17,15 +20,18 @@
     <td><%= room.room_number %></td>
     <td><%= room.beds.count %></td>
     <td><%= room.beds.count(:conditions => "vacant = true") %></td>
+    <td><%= link_to 'Edit', edit_room_path(room) %><br/>
+        <%= link_to "Delete",room, :confirm => 'Are you sure?',
+            :method => :delete  %> </td>
   </tr>
   
 <% end %>
    </tbody>
 </table>
-<button type = "button" class = "btn btn-warning mr-3"><%= link_to 'New Rom', new_room_path %></button>
-<button type = "button" class = "btn btn-warning mr-3"><%= link_to 'Export CSV', export_csv_records_rooms_path %></button>
 <br />
 <%else%>
-  <h2 class ='mt-5'>No Rooms</h2>
+ <br/> <h2 class ='mt-5' style ="color:red;">No Rooms</h2>
   <%end%>
+  <button type = "button" class = "btn btn-warning mr-3"><%= link_to 'New Rom', new_room_path %></button>
+<button type = "button" class = "btn btn-warning mr-3"><%= link_to 'Export CSV', export_csv_records_rooms_path %></button>
 <% end %>

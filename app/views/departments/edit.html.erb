@@ -1,0 +1,21 @@
+<br/><%= make_breadcrumb %>   
+ <%= render_breadcrumbs  %>
+<% if permitted_to? :edit %><br/>
+<br/><h3>Editing Department</h3>
+
+<% form_for(@department) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name, :class => "form-control"  %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description, :class => "form-control" %>
+  </p>
+  <p>
+    <%= f.submit "Update",:class => "btn" %>
+  </p>
+<% end %>
+  <% end %>

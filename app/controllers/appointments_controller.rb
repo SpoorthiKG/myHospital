@@ -9,20 +9,27 @@ class AppointmentsController < ApplicationController
   def create
     @user = current_user
     @slot = Slot.find(params[:slot])
-    @slot.is_booked = 1
-    @slot.save
-    @appointment = Appointment.new(:doctor_id =>params[:doctor],:slot_id=> params[:slot],:patient_id=>@user.user_determin_id,:appointment_date=>@slot.slot_date,:is_booked=>1)
+    @slot.update_attributes(:is_booked => 1)
+    @appointment = Appointment.new(:doctor_id =>params[:doctor],:slot_id=> params[:slot],
+      :patient_id=>@user.user_determin_id,:appointment_date=>@slot.slot_date,:is_booked=>1)
     if @appointment.save
       flash[:notice] = "You have successfully booked the appointment"
-      redirect_to view_patients_path
+      redirect_to view_users_path
   else
     flash[:notice]= 'Something went wrong!!! Try again'
-    redirect_to view_patients_path
+    redirect_to view_users_path
     end
   end
 
   def index
-    @appointments = Appointment.all
+    @doctors = Doctor.all
+  end
+  
+  def adding_appointment
+    @appointments = Appointment.find_all_by_doctor_id(params[:id])
+    render :update do |page|
+        page.replace_html 'adding_appointment', :partial => "adding_appointment"
+      end
   end
   
   def available_doctors

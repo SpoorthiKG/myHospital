@@ -1,10 +1,12 @@
-<%= make_breadcrumb %>   
+<br/><%= make_breadcrumb %>   
  <%= render_breadcrumbs  %>
 <% if permitted_to? :create, :patient_to_beds %>
-<% form_for :patient_to_bed, :url => {:controller => :patient_to_beds, :action => :create} do |f| %>
+ <span style="float:right;"><%= link_to "logout", logout_path %></span><br/>
+ <p style="color: blue"><%= flash[:notice] %></p>
+<br/><% form_for :patient_to_bed, :url => {:controller => :patient_to_beds, :action => :create} do |f| %>
 <%= f.error_messages %>
 <label>Select a Room</label>
-<%= select_tag :room, options_for_select(@rooms.map{|p| [p.room_number, p.id]})  , :class => "form-control", :onchange => "show_the_value(this.value)" %>
+<%= select_tag :room, options_for_select(@rooms.map{|p| [p.room_number, p.id]}.insert(0,"Select a Room"))  , :class => "form-control", :onchange => "show_the_value(this.value)" %>
 <div id ="available_beds" style="margin-top: 10px;"></div>
 <!--<%= f.submit "Create", :class => "btn"%>-->
 <%end%>

@@ -1,0 +1,11 @@
+<%  form_for :bed , :url => {:controller => :beds, :action => :create} do |f| %>
+<%= f.error_messages %>
+             <%= f.hidden_field :room_id, :value => params[:room_id] %>
+            <form>
+            <div class ="form-group">
+               <%= f.label :bed_number %>
+                <%= f.text_field :bed_number, :class => "form-control" %><br/>
+            </div>
+ <%= f.submit "Create", :class => "btn"%>
+            
+            <% end %>

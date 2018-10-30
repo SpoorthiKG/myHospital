@@ -5,16 +5,17 @@
             <url>config/initializers/breadcrumbs.rb</url>
             <bookmark id="1">
                 <name/>
-                <line>5</line>
+                <line>2</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/foradian/myHospital/config/routes.rb</file>
+            <file>file:/home/foradian/myHospital/app/views/slots/index.html.erb</file>
+            <file>file:/home/foradian/myHospital/app/views/slots/total_slots.html.erb</file>
             <file>file:/home/foradian/myHospital/app/views/slots/new.html.erb</file>
-            <file>file:/home/foradian/myHospital/app/models/slot.rb</file>
+            <file>file:/home/foradian/myHospital/app/views/users/view.html.erb</file>
         </group>
     </open-files>
 </project-private>

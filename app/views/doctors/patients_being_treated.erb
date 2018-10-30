@@ -1,6 +1,7 @@
-<%= make_breadcrumb %>   
+<br/><%= make_breadcrumb %>   
  <%= render_breadcrumbs  %>
 <% if permitted_to? :patients_being_treated %>
+<span style="float:right;"><%= link_to "logout", logout_path %></span><br/>
 <%if @patients.present?%>
 <table class ="table table-hover mt-5">
     <thead>
@@ -18,9 +19,10 @@
 <% end %>
     </tbody>
 </table>
+<button class = "btn btn-warning"><%= link_to "Download Pdf", showing_doctors_path %></button>
 <%else%>
-<h2> No </h2>
+<br/><h2 style ="color:red"> No Patients </h2>
 <%end%>
 <br />
 <%end%>
-<button class = "btn btn-warning"><%= link_to "Download Pdf", showing_doctors_path %></button>
+
